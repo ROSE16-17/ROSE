@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Приветствие с розой</title>
+  <style>
+    body {
+      background-color: pink;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-size: 48px;
+      font-family: "Pacifico", cursive; /* Пример красивого шрифта */
+    }
+
+    #greeting {
+      opacity: 0;
+      animation: showText 5s linear forwards;
+    }
+
+    @keyframes showText {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    #rose {
+      width: 100px;
+      height: auto;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #rose.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="greeting"></div>
+  <img id="rose" src="rose.png" alt="Роза">
+
+  <script>
+    const greeting = document.getElementById("greeting");
+    const roseImage = document.getElementById("rose");
+
+    const word = "Привет, Роза)";
+    const delay = 500; // Задержка между отображением букв (в миллисекундах)
+
+    greeting.style.left = `${(window.innerWidth - greeting.offsetWidth) / 2}px`;
+
+    const showText = () => {
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index >= word.length) {
+          clearInterval(interval);
+        } else {
+          greeting.innerHTML += word[index];
+          index++;
+        }
+      }, delay);
+    };
+
+    const showRose = () => {
+      roseImage.classList.add("show");
+    };
+
+    showText();
+    showRose();
+  </script>
+</body>
+</html>
